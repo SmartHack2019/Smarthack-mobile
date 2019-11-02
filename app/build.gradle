@@ -46,6 +46,7 @@ dependencies {
     implementation "io.reactivex:rxjava:${version_Rxjava}"
     implementation "io.reactivex:rxandroid:${version_Rxandroid}"
     implementation "com.google.code.gson:gson:${version_Gson}"
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0-alpha'
     
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
