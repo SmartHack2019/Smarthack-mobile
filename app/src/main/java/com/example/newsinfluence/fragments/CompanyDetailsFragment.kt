@@ -36,6 +36,9 @@ class CompanyDetailsFragment : BaseFragment() {
 
         mCompany = arguments?.getParcelable(Constants.Keys.COMPANY) ?: return
 
+        tv_price_value.text = mCompany.price.toString()
+        tv_change_value.text = mCompany.change.toString()
+
         val entries = ArrayList<Entry>()
 
         for(i in 1..10) {
