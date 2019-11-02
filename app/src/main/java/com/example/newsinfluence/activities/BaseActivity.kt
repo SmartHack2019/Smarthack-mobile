@@ -40,7 +40,7 @@ abstract class BaseActivity : AppCompatActivity(), OnActivityAlert, OnActivityFr
         val TOP_TAG = mFragmentManager?.getBackStackEntryAt(fragmentsCount.minus(1))?.name
 
         when (TOP_TAG) {
-            Constants.FragmentTags.TAG_FRAGMENT_HOME -> {
+            Constants.FragmentTags.TAG_FRAGMENT_COMPANIES -> {
                 finish()
                 return
             }

@@ -37,7 +37,7 @@ class Constants {
 
     object FragmentTags {
         const val TAG_POP = "pop_fragment"
-        const val TAG_FRAGMENT_HOME = "TAG_FRAGMENT_HOME"
+        const val TAG_FRAGMENT_COMPANIES = "TAG_FRAGMENT_COMPANIES"
         const val TAG_FRAGMENT_COMPANY_DETAILS = "TAG_FRAGMENT_COMPANY_DETAILS"
     }
 

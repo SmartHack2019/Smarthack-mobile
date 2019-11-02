@@ -4,7 +4,7 @@ import android.os.Bundle
 import com.example.newsinfluence.R
 import com.example.newsinfluence.fragments.BaseFragment
 import com.example.newsinfluence.fragments.CompanyDetailsFragment
-import com.example.newsinfluence.fragments.HomeFragment
+import com.example.newsinfluence.fragments.CompaniesFragment
 import com.example.newsinfluence.helpers.Constants
 
 class HomeActivity : BaseActivity() {
@@ -13,7 +13,7 @@ class HomeActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        onAddFragment(Constants.FragmentTags.TAG_FRAGMENT_HOME)
+        onAddFragment(Constants.FragmentTags.TAG_FRAGMENT_COMPANIES)
     }
 
     override fun getFragmentContainer(): Int? {
@@ -24,8 +24,8 @@ class HomeActivity : BaseActivity() {
         Constants.FragmentTags.TAG_POP ->
             mFragmentManager?.findFragmentByTag(TAG) as BaseFragment
 
-        Constants.FragmentTags.TAG_FRAGMENT_HOME ->
-            HomeFragment.newInstance()
+        Constants.FragmentTags.TAG_FRAGMENT_COMPANIES ->
+            CompaniesFragment.newInstance()
 
         Constants.FragmentTags.TAG_FRAGMENT_COMPANY_DETAILS ->
             CompanyDetailsFragment.newInstance()
