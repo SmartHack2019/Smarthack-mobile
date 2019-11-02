@@ -2,6 +2,7 @@ package com.example.newsinfluence.fragments
 
 import android.graphics.Color
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -12,9 +13,11 @@ import com.example.newsinfluence.adapters.NewsAdapter
 import com.example.newsinfluence.helpers.Constants
 import com.example.newsinfluence.models.Company
 import com.example.newsinfluence.models.News
+import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.formatter.IAxisValueFormatter
 import kotlinx.android.synthetic.main.fragment_companies.*
 import kotlinx.android.synthetic.main.fragment_company_details.*
 
@@ -43,14 +46,42 @@ class CompanyDetailsFragment : BaseFragment() {
         setupUI()
         createFakeNews()
         setupNewsList()
+        setupChart()
+    }
 
+    fun setupChart() {
+        val ctx = context ?: return
         val entries = ArrayList<Entry>()
 
         for(i in 1..10) {
-            entries.add(Entry(i.toFloat(), i.toFloat()))
+            if (i % 2 == 0) {
+                entries.add(Entry(i.toFloat(), i.toFloat() - 2))
+            } else {
+                entries.add(Entry(i.toFloat(), i.toFloat() + 2))
+            }
         }
 
         val dataSet = LineDataSet(entries, "label")
+
+        chart.getXAxis().setDrawGridLines(false)
+        dataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER)
+        dataSet.setDrawFilled(true)
+        dataSet.setDrawValues(false)
+        dataSet.setFillColor(ContextCompat.getColor(ctx, R.color.pale_green))
+        dataSet.setColor(ContextCompat.getColor(ctx, R.color.pale_green))
+        dataSet.setDrawCircles(false)
+        chart.getDescription().setText("")
+        chart.getLegend().setEnabled(false)
+        chart.getAxisRight().setEnabled(false)
+        dataSet.setDrawHorizontalHighlightIndicator(false)
+        dataSet.setDrawVerticalHighlightIndicator(false)
+
+        chart.getAxisLeft().setValueFormatter(object : IAxisValueFormatter{
+            override fun getFormattedValue(value: Float, axis: AxisBase?): String {
+                return String.format("%.2f $",value)
+            }
+        })
+
         val lineData = LineData(dataSet)
         chart.data = lineData
         chart.invalidate()
