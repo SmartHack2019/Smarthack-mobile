@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">NewsInfluence</string>
+
+    <string name="alert_error_null">Sorry, an error has occurred. Please, try again later.</string>
+    <string name="alert_ok">OK</string>
+    <string name="alert_try_again">Try Again</string>
+    <string name="alert_open_settings">Open Settings</string>
+    <string name="alert_cancel">Cancel</string>
+    <string name="alert_got_it">Got it!</string>
+    <string name="alert_confirm">Confirm</string>
+    <string name="you_have_been_logged_out">You have been logged out.</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
