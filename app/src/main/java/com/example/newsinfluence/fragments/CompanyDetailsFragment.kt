@@ -1,5 +1,6 @@
 package com.example.newsinfluence.fragments
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -34,10 +35,7 @@ class CompanyDetailsFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mCompany = arguments?.getParcelable(Constants.Keys.COMPANY) ?: return
-
-        tv_price_value.text = mCompany.price.toString()
-        tv_change_value.text = mCompany.change.toString()
+        setupUI()
 
         val entries = ArrayList<Entry>()
 
@@ -49,5 +47,19 @@ class CompanyDetailsFragment : BaseFragment() {
         val lineData = LineData(dataSet)
         chart.data = lineData
         chart.invalidate()
+    }
+
+    fun setupUI() {
+        mCompany = arguments?.getParcelable(Constants.Keys.COMPANY) ?: return
+
+        tv_price_value.text = mCompany.price.toString() + " £"
+        tv_company_name_news.text = mCompany.name + " News"
+        tv_change_value.text = mCompany.change.toString()
+
+        if (mCompany.change > 0.0f) {
+            tv_change_value.setTextColor(Color.GREEN)
+        } else {
+            tv_change_value.setTextColor(Color.RED)
+        }
     }
 }
