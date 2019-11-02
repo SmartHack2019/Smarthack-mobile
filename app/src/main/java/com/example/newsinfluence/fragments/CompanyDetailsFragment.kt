@@ -1,12 +1,14 @@
 package com.example.newsinfluence.fragments
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 
 import com.example.newsinfluence.R
+import com.example.newsinfluence.helpers.Constants
+import com.example.newsinfluence.models.Company
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
@@ -20,6 +22,8 @@ class CompanyDetailsFragment : BaseFragment() {
         }
     }
 
+    private lateinit var mCompany: Company
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -29,6 +33,8 @@ class CompanyDetailsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        mCompany = arguments?.getParcelable(Constants.Keys.COMPANY) ?: return
 
         val entries = ArrayList<Entry>()
 

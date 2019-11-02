@@ -8,6 +8,7 @@ import android.view.ViewGroup
 
 import com.example.newsinfluence.R
 import com.example.newsinfluence.adapters.CompaniesAdapter
+import com.example.newsinfluence.helpers.Constants
 import com.example.newsinfluence.models.Company
 import kotlinx.android.synthetic.main.fragment_companies.*
 
@@ -64,5 +65,12 @@ class CompaniesFragment : BaseFragment() {
 
     private fun selectItem(position: Int) {
         val selectedItem = mCompaniesList[position]
+
+        val bundle = Bundle()
+        bundle.putParcelable(
+            Constants.Keys.COMPANY,
+            selectedItem
+        )
+        onReplaceFragmentByTAG(Constants.FragmentTags.TAG_FRAGMENT_COMPANY_DETAILS, bundle)
     }
 }

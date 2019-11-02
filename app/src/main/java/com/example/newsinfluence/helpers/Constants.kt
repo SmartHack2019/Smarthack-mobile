@@ -19,6 +19,7 @@ class Constants {
         const val STATUS = "status"
         const val REFRESH_TOKEN = "refresh_token"
         const val KEY = "key"
+        const val COMPANY = "company"
     }
 
     object ApiStatus {
