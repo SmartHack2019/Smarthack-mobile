@@ -62,19 +62,18 @@ class CompanyDetailsFragment : BaseFragment() {
         }
 
         val dataSet = LineDataSet(entries, "label")
-
-        chart.getXAxis().setDrawGridLines(false)
         dataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER)
         dataSet.setDrawFilled(true)
         dataSet.setDrawValues(false)
         dataSet.setFillColor(ContextCompat.getColor(ctx, R.color.pale_green))
         dataSet.setColor(ContextCompat.getColor(ctx, R.color.pale_green))
         dataSet.setDrawCircles(false)
+        dataSet.setDrawHorizontalHighlightIndicator(false)
+        dataSet.setDrawVerticalHighlightIndicator(false)
+        chart.getXAxis().setDrawGridLines(false)
         chart.getDescription().setText("")
         chart.getLegend().setEnabled(false)
         chart.getAxisRight().setEnabled(false)
-        dataSet.setDrawHorizontalHighlightIndicator(false)
-        dataSet.setDrawVerticalHighlightIndicator(false)
 
         chart.getAxisLeft().setValueFormatter(object : IAxisValueFormatter{
             override fun getFormattedValue(value: Float, axis: AxisBase?): String {
@@ -119,18 +118,33 @@ class CompanyDetailsFragment : BaseFragment() {
 
     private fun selectItem(position: Int) {
         val selectedItem = mNewsList[position]
+
+        val bundle = Bundle()
+        bundle.putParcelable(
+            Constants.Keys.NEWS,
+            selectedItem
+        )
+        onReplaceFragmentByTAG(Constants.FragmentTags.TAG_FRAGMENT_NEWS_DETAILS, bundle)
     }
 
     private fun createFakeNews() {
         val news = arrayListOf<News>()
-        news.add(News("Google Fi is offering the Pixel 3A for just $299"))
-        news.add(News("Google Fi is offering the Pixel 3A for just $299 Google Fi is offering the Pixel 3A for just \$299"))
-        news.add(News("Google Fi is offering the Pixel 3A for just $299"))
-        news.add(News("Google Fi is offering the Pixel 3A for just $299 Google Fi is offering the Pixel 3A for just \$299"))
-        news.add(News("Google Fi is offering the Pixel 3A for just $299"))
-        news.add(News("Google Fi is offering the Pixel 3A for just $299"))
-        news.add(News("Google Fi is offering the Pixel 3A for just $299 Google Fi is offering the Pixel 3A for just \$299"))
-        news.add(News("Google Fi is offering the Pixel 3A for just $299 Google Fi is offering the Pixel 3A for just \$299"))
+        news.add(News("Google Fi is offering the Pixel 3A for just $299",
+            "https://www.google.com/"))
+        news.add(News("Google Fi is offering the Pixel 3A for just $299 Google Fi is offering the Pixel 3A for just $299",
+            "https://www.google.com/"))
+        news.add(News("Google Fi is offering the Pixel 3A for just $299",
+            "https://www.google.com/"))
+        news.add(News("Google Fi is offering the Pixel 3A for just $299 Google Fi is offering the Pixel 3A for just $299",
+            "https://www.google.com/"))
+        news.add(News("Google Fi is offering the Pixel 3A for just $299",
+            "https://www.google.com/"))
+        news.add(News("Google Fi is offering the Pixel 3A for just $299",
+            "https://www.google.com/"))
+        news.add(News("Google Fi is offering the Pixel 3A for just $299 Google Fi is offering the Pixel 3A for just $299",
+            "https://www.google.com/"))
+        news.add(News("Google Fi is offering the Pixel 3A for just $299 Google Fi is offering the Pixel 3A for just $299",
+            "https://www.google.com/"))
         mNewsList = news
     }
 }

@@ -1,3 +1,8 @@
 package com.example.newsinfluence.models
 
-data class News(val title: String)
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
+data class News(val title: String,
+                val url: String): Parcelable

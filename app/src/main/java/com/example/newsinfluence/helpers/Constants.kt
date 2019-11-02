@@ -20,6 +20,7 @@ class Constants {
         const val REFRESH_TOKEN = "refresh_token"
         const val KEY = "key"
         const val COMPANY = "company"
+        const val NEWS = "news"
     }
 
     object ApiStatus {
@@ -40,6 +41,7 @@ class Constants {
         const val TAG_POP = "pop_fragment"
         const val TAG_FRAGMENT_COMPANIES = "TAG_FRAGMENT_COMPANIES"
         const val TAG_FRAGMENT_COMPANY_DETAILS = "TAG_FRAGMENT_COMPANY_DETAILS"
+        const val TAG_FRAGMENT_NEWS_DETAILS = "TAG_FRAGMENT_NEWS_DETAILS"
     }
 
     object Patterns {
