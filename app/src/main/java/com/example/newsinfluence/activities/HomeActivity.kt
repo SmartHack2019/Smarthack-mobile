@@ -13,7 +13,7 @@ class HomeActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        onAddFragment(Constants.FragmentTags.TAG_FRAGMENT_COMPANY_DETAILS)
+        onAddFragment(Constants.FragmentTags.TAG_FRAGMENT_HOME)
     }
 
     override fun getFragmentContainer(): Int? {

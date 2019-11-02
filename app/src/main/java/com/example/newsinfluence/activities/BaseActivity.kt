@@ -16,7 +16,6 @@ import com.example.newsinfluence.helpers.Constants
 import com.example.newsinfluence.interfaces.OnActivityAlert
 import com.example.newsinfluence.interfaces.OnActivityFragmentCommunication
 import com.example.newsinfluence.interfaces.OnRequestAction
-import com.example.newsinfluence.models.User
 import com.example.newsinfluence.widgets.LoadingDialog
 
 abstract class BaseActivity : AppCompatActivity(), OnActivityAlert, OnActivityFragmentCommunication {
@@ -26,8 +25,6 @@ abstract class BaseActivity : AppCompatActivity(), OnActivityAlert, OnActivityFr
     protected val EMPTY_STRING = ""
 
     protected var mFragmentManager: FragmentManager? = null
-
-    protected var mUser: User? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
