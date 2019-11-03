@@ -5,10 +5,10 @@ import com.example.newsinfluence.BuildConfig
 object UtilsAPI {
 
     var BASE_API: String = ""
-    var DEV_API: String = "http://18.219.221.253:4000"
+    var DEV_API: String = "http://test-app-service-m.azurewebsites.net"
 
     val BASE_URL = ""
-    val DEV_URL = "http://192.168.0.154:4000" //local
+    val DEV_URL = "http://test-app-service-m.azurewebsites.net" //local
 
     val apiService: APIService?
         get() {

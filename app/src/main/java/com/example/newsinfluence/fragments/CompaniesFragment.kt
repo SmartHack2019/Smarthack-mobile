@@ -38,21 +38,8 @@ class CompaniesFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setActionBarTitle("FTSE 100 Index")
-
-        val companies = arrayListOf<Company>()
-        companies.add(Company("AAL", "ANGLO AMERICAN",200.82f, -0.24f))
-        companies.add(Company("AAL", "ANGLO AMERICAN",200.82f, 0.24f))
-        companies.add(Company("AAL", "ANGLO AMERICAN",200.82f, -0.24f))
-        companies.add(Company("AAL", "ANGLO AMERICAN",200.82f, 0.24f))
-        companies.add(Company("AAL", "ANGLO AMERICAN",200.82f, 0.24f))
-        companies.add(Company("AAL", "ANGLO AMERICAN",200.82f, 0.24f))
-        companies.add(Company("AAL", "ANGLO AMERICAN",200.82f, 0.24f))
-        companies.add(Company("AAL", "ANGLO AMERICAN",200.82f, 0.24f))
-        companies.add(Company("AAL", "ANGLO AMERICAN",200.82f, 0.24f))
-        companies.add(Company("AAL", "ANGLO AMERICAN",200.82f, 0.24f))
-        mCompaniesList = companies
-
         setupCompaniesList()
+        getCompanies()
     }
 
     private fun setupCompaniesList() {

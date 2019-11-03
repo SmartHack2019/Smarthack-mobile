@@ -5,6 +5,6 @@ import retrofit2.http.GET
 import rx.Observable
 
 interface APIService {
-    @GET("/account/check")
+    @GET("/api/companies")
     fun getCompanies(): Observable<GetCompaniesResponse>
 }

@@ -77,7 +77,7 @@ class CompanyDetailsFragment : BaseFragment() {
 
         chart.getAxisLeft().setValueFormatter(object : IAxisValueFormatter{
             override fun getFormattedValue(value: Float, axis: AxisBase?): String {
-                return String.format("%.2f $",value)
+                return String.format("%.2f %",value)
             }
         })
 
