@@ -24,7 +24,7 @@ class NewsAdapter(private val items: ArrayList<News>):
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.titleTextView?.apply {
-            text = items[position].title
+            text = items[position].headline
         }
     }
 

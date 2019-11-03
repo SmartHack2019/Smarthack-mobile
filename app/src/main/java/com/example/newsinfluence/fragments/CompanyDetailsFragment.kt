@@ -14,8 +14,7 @@ import com.example.newsinfluence.helpers.Constants
 import com.example.newsinfluence.interfaces.OnRequestDoneWithResult
 import com.example.newsinfluence.models.Company
 import com.example.newsinfluence.models.News
-import com.example.newsinfluence.models.Point
-import com.example.newsinfluence.requests.GetPointsRequest
+import com.example.newsinfluence.requests.GetNewsRequest
 import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
@@ -46,21 +45,17 @@ class CompanyDetailsFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupUI()
-        createFakeNews()
         setupNewsList()
-        setupChart()
+        getNews()
     }
 
     fun setupChart() {
+        if (mNewsList == null || mNewsList.isEmpty()) { return }
         val ctx = context ?: return
         val entries = ArrayList<Entry>()
 
-        for(i in 1..10) {
-            if (i % 2 == 0) {
-                entries.add(Entry(i.toFloat(), i.toFloat() - 2))
-            } else {
-                entries.add(Entry(i.toFloat(), i.toFloat() + 2))
-            }
+        mNewsList.forEach {
+            entries.add(Entry(1.0f, it.impact))
         }
 
         val dataSet = LineDataSet(entries, "label")
@@ -79,7 +74,7 @@ class CompanyDetailsFragment : BaseFragment() {
 
         chart.getAxisLeft().setValueFormatter(object : IAxisValueFormatter{
             override fun getFormattedValue(value: Float, axis: AxisBase?): String {
-                return String.format("%.2f %",value)
+                return String.format("%.2f %%",value)
             }
         })
 
@@ -129,36 +124,21 @@ class CompanyDetailsFragment : BaseFragment() {
         onReplaceFragmentByTAG(Constants.FragmentTags.TAG_FRAGMENT_NEWS_DETAILS, bundle)
     }
 
-    private fun createFakeNews() {
-        val news = arrayListOf<News>()
-        news.add(News("Google Fi is offering the Pixel 3A for just $299",
-            "https://www.google.com/"))
-        news.add(News("Google Fi is offering the Pixel 3A for just $299 Google Fi is offering the Pixel 3A for just $299",
-            "https://www.google.com/"))
-        news.add(News("Google Fi is offering the Pixel 3A for just $299",
-            "https://www.google.com/"))
-        news.add(News("Google Fi is offering the Pixel 3A for just $299 Google Fi is offering the Pixel 3A for just $299",
-            "https://www.google.com/"))
-        news.add(News("Google Fi is offering the Pixel 3A for just $299",
-            "https://www.google.com/"))
-        news.add(News("Google Fi is offering the Pixel 3A for just $299",
-            "https://www.google.com/"))
-        news.add(News("Google Fi is offering the Pixel 3A for just $299 Google Fi is offering the Pixel 3A for just $299",
-            "https://www.google.com/"))
-        news.add(News("Google Fi is offering the Pixel 3A for just $299 Google Fi is offering the Pixel 3A for just $299",
-            "https://www.google.com/"))
-        mNewsList = news
-    }
-
-    private fun getChartPoints() {
+    private fun getNews() {
         val ctx = context ?: return
         mAlertCallback?.showProgressDialog()
-        GetPointsRequest(getChartPointsListener, ctx).execute()
+        GetNewsRequest(getNewsListener, ctx).execute(mCompany.id)
     }
 
-    private val getChartPointsListener = object : OnRequestDoneWithResult {
+    private val getNewsListener = object : OnRequestDoneWithResult {
         override fun onRequestSuccess(result: Any) {
-            val points = result as? ArrayList<Point> ?: return
+            val news = result as? ArrayList<News> ?: return
+
+            mNewsList.clear()
+            mNewsList.addAll(news)
+            mNewsAdapter.notifyDataSetChanged()
+
+            setupChart()
             mAlertCallback?.hideProgressDialog()
         }
 

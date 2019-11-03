@@ -2,7 +2,6 @@ package com.example.newsinfluence.fragments
 
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,8 +30,8 @@ class NewsDetailsFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val news: News = arguments?.getParcelable(Constants.Keys.NEWS) ?: return
-        setActionBarTitle(news.title)
-        webview.loadUrl(news.url)
+        setActionBarTitle(news.headline)
+        webview.loadUrl(news.link)
         webview.settings.javaScriptEnabled = true
     }
 }

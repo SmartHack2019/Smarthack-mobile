@@ -4,27 +4,27 @@ import android.content.Context
 import android.util.Log
 import com.example.newsinfluence.helpers.api.UtilsAPI
 import com.example.newsinfluence.interfaces.OnRequestDoneWithResult
-import com.example.newsinfluence.models.GetPointsResponse
+import com.example.newsinfluence.models.GetNewsResponse
 import rx.Subscriber
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 
-class GetPointsRequest(
+class GetNewsRequest(
     mListener: OnRequestDoneWithResult,
     context: Context
 ) : BaseRequest(mListener, context) {
 
-    private val TAG = "GetPointsRequest"
+    private val TAG = "GetNewsRequest"
 
-    fun execute() {
+    fun execute(companyId: String) {
         val mApiService = UtilsAPI.apiService ?: return
 
         mApiService
-            .getPoints()
+            .getNews(companyId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .unsubscribeOn(Schedulers.io())
-            .subscribe(object : Subscriber<GetPointsResponse>() {
+            .subscribe(object : Subscriber<GetNewsResponse>() {
                 override fun onCompleted() {
                     Log.i(TAG, "onCompleted")
                 }
@@ -33,9 +33,9 @@ class GetPointsRequest(
                     onParseErrorResult(throwable)
                 }
 
-                override fun onNext(response: GetPointsResponse) {
+                override fun onNext(response: GetNewsResponse) {
                     Log.i(TAG, "onNext")
-                    mListener.onRequestSuccess(response.points)
+                    mListener.onRequestSuccess(response.news)
                 }
             })
     }
