@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">NewsInfluence</string>
+    <string name="app_name">Stocky</string>
 
     <string name="alert_error_null">Sorry, an error has occurred. Please, try again later.</string>
     <string name="alert_ok">OK</string>
@@ -14,4 +14,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="price">Price</string>
     <string name="change">Change</string>
+    <string name="increase">Increase</string>
 </resources>

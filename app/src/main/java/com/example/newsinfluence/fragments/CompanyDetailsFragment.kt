@@ -5,11 +5,9 @@ import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.text.format.DateFormat
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import com.example.newsinfluence.R
 import com.example.newsinfluence.adapters.NewsAdapter
 import com.example.newsinfluence.helpers.Constants
@@ -24,8 +22,6 @@ import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IAxisValueFormatter
 import kotlinx.android.synthetic.main.fragment_company_details.*
 import java.text.SimpleDateFormat
-import java.util.*
-import kotlin.collections.ArrayList
 
 class CompanyDetailsFragment : BaseFragment() {
 
@@ -63,7 +59,7 @@ class CompanyDetailsFragment : BaseFragment() {
         mNewsList.forEach {
             val date = format.parse(it.time)
             val day = DateFormat.format("dd", date).toString()
-                entries.add(Entry(day.toFloat(), it.impact))
+            entries.add(Entry(day.toFloat(), it.impact))
         }
 
         val dataSet = LineDataSet(entries, "label")
