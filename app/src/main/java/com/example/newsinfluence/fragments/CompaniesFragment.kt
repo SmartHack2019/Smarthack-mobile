@@ -10,7 +10,10 @@ import android.view.ViewGroup
 import com.example.newsinfluence.R
 import com.example.newsinfluence.adapters.CompaniesAdapter
 import com.example.newsinfluence.helpers.Constants
+import com.example.newsinfluence.interfaces.OnRequestDoneWithResult
 import com.example.newsinfluence.models.Company
+import com.example.newsinfluence.models.GetCompaniesResponse
+import com.example.newsinfluence.requests.GetCompaniesRequest
 import kotlinx.android.synthetic.main.fragment_companies.*
 
 class CompaniesFragment : BaseFragment() {
@@ -75,5 +78,26 @@ class CompaniesFragment : BaseFragment() {
             selectedItem
         )
         onReplaceFragmentByTAG(Constants.FragmentTags.TAG_FRAGMENT_COMPANY_DETAILS, bundle)
+    }
+
+    private fun getCompanies() {
+        val ctx = context ?: return
+        mAlertCallback?.showProgressDialog()
+        GetCompaniesRequest(getCompaniesListener, ctx).execute()
+    }
+
+    private val getCompaniesListener = object : OnRequestDoneWithResult {
+        override fun onRequestSuccess(result: Any) {
+            val companies = result as? ArrayList<Company> ?: return
+
+            mCompaniesList.clear()
+            mCompaniesList.addAll(companies)
+            mCompaniesAdapter.notifyDataSetChanged()
+            mAlertCallback?.hideProgressDialog()
+        }
+
+        override fun onRequestFailed(errorMessage: String, unauthorized: Boolean) {
+            mAlertCallback?.showAlert(errorMessage)
+        }
     }
 }
