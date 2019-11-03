@@ -11,14 +11,16 @@ import android.view.ViewGroup
 import com.example.newsinfluence.R
 import com.example.newsinfluence.adapters.NewsAdapter
 import com.example.newsinfluence.helpers.Constants
+import com.example.newsinfluence.interfaces.OnRequestDoneWithResult
 import com.example.newsinfluence.models.Company
 import com.example.newsinfluence.models.News
+import com.example.newsinfluence.models.Point
+import com.example.newsinfluence.requests.GetPointsRequest
 import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IAxisValueFormatter
-import kotlinx.android.synthetic.main.fragment_companies.*
 import kotlinx.android.synthetic.main.fragment_company_details.*
 
 class CompanyDetailsFragment : BaseFragment() {
@@ -146,5 +148,22 @@ class CompanyDetailsFragment : BaseFragment() {
         news.add(News("Google Fi is offering the Pixel 3A for just $299 Google Fi is offering the Pixel 3A for just $299",
             "https://www.google.com/"))
         mNewsList = news
+    }
+
+    private fun getChartPoints() {
+        val ctx = context ?: return
+        mAlertCallback?.showProgressDialog()
+        GetPointsRequest(getChartPointsListener, ctx).execute()
+    }
+
+    private val getChartPointsListener = object : OnRequestDoneWithResult {
+        override fun onRequestSuccess(result: Any) {
+            val points = result as? ArrayList<Point> ?: return
+            mAlertCallback?.hideProgressDialog()
+        }
+
+        override fun onRequestFailed(errorMessage: String, unauthorized: Boolean) {
+            mAlertCallback?.showAlert(errorMessage)
+        }
     }
 }
