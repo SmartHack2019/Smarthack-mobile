@@ -14,5 +14,5 @@ data class Company(@SerializedName("id")
                    @Expose val name: String,
                    @SerializedName("price")
                    @Expose val price: Float,
-                   @SerializedName("percent")
+                   @SerializedName("increase")
                    @Expose val change: Float): Parcelable

@@ -4,6 +4,8 @@ import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
+import android.text.format.DateFormat
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +23,9 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IAxisValueFormatter
 import kotlinx.android.synthetic.main.fragment_company_details.*
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class CompanyDetailsFragment : BaseFragment() {
 
@@ -53,9 +58,12 @@ class CompanyDetailsFragment : BaseFragment() {
         if (mNewsList == null || mNewsList.isEmpty()) { return }
         val ctx = context ?: return
         val entries = ArrayList<Entry>()
+        val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
 
         mNewsList.forEach {
-            entries.add(Entry(1.0f, it.impact))
+            val date = format.parse(it.time)
+            val day = DateFormat.format("dd", date).toString()
+                entries.add(Entry(day.toFloat(), it.impact))
         }
 
         val dataSet = LineDataSet(entries, "label")
