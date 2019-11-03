@@ -1,5 +1,6 @@
 package com.example.newsinfluence.adapters
 
+import android.graphics.Color
 import android.support.v7.widget.RecyclerView
 import android.text.format.DateFormat
 import android.view.LayoutInflater
@@ -40,11 +41,22 @@ class NewsAdapter(private val items: ArrayList<News>):
         holder.dateTextView?.apply {
             text = " Date: " + day + "." + month + "." + year
         }
+
+        holder.influenceTextView?.apply {
+            text = "Impact: " + items[position].impact.toString()
+        }
+
+        if (items[position].impact > 0.0f) {
+            holder.influenceTextView?.setTextColor(Color.GREEN)
+        } else {
+            holder.influenceTextView?.setTextColor(Color.RED)
+        }
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val titleTextView: TextView? = view.tv_title
         val dateTextView: TextView? = view.tv_date
+        val influenceTextView: TextView? = view.tv_influence
 
         init {
             itemView.setOnClickListener {
