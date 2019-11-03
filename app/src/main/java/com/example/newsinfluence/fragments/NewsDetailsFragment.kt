@@ -33,5 +33,7 @@ class NewsDetailsFragment : BaseFragment() {
         setActionBarTitle(news.headline)
         webview.loadUrl(news.link)
         webview.settings.javaScriptEnabled = true
+        webview.settings.builtInZoomControls = true
+        webview.settings.displayZoomControls = false
     }
 }
